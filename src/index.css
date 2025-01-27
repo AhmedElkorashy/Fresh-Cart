@@ -14,7 +14,9 @@
 .row {
   @apply flex flex-wrap py-5 px-3;
 }
-
+.myFooter{
+  min-height: 100vh;
+}
 .mySlider {
   @media (min-width: 640px) {
     width: 100%;

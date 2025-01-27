@@ -35,7 +35,7 @@ export default function Cart() {
   }
   async function getCart() {
     let response = await getProductToCart();
-    // console.log(response);
+    console.log(response);
     if (response.data.status === "success") {
       // console.log(response.data.status);
       setCarts(response.data.data);
