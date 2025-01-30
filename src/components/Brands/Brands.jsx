@@ -21,11 +21,14 @@ export default function Brands() {
   }, []);
   return (
     <>
-      <div className="row">
+      <div className="row my-4">
         {data?.data?.data.length > 0 ? (
           <>
             {data?.data?.data.map((items) => (
-              <div className="md:w-1/5 lg:w-1/6 sm:w-1/3 p-2" key={items?._id}>
+              <div
+                className="md:w-1/5 rounded-lg myShadow lg:w-1/6 sm:w-1/3 p-2"
+                key={items?._id}
+              >
                 <Link to={`/BrandsDetails/${items?._id}/${items.name}`}>
                   <img src={items.image} className="w-full block " alt="" />
                 </Link>

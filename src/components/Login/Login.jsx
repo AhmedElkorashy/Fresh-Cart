@@ -8,13 +8,45 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { UserContext } from "../../Context/UserContext";
+import { cartContext } from "./../../Context/CartContext";
+import { WishListContext } from "../../Context/WishListContext";
 
 export default function Register() {
   let { userLogin, setUserLogin } = useContext(UserContext);
+  let {
+    addProductToCart,
+    setCartCounter,
+    cartCounter,
+    getProductToCart,
+    setCarts,
+  } = useContext(cartContext);
+  let {
+    addToWishList,
+    removeFromWishList,
+    setWishListIds,
+    wishListIds,
+    getWishList,
+  } = useContext(WishListContext);
+
   const [loading, setLoading] = useState(false);
   const [ErrorState, setErrorState] = useState("");
+  async function getWishListBridge() {
+    let res = await getWishList();
+    console.log(res);
+    setWishListIds(res?.data?.data);
+  }
+  async function getCart() {
+    let response = await getProductToCart();
+    console.log(response);
+    if (response.data.status === "success") {
+      console.log(response);
+      setCarts(response.data.data);
+    }
+  }
   useEffect(() => {
     document.title = "Login";
+    // getWishListBridge();
+    // getCart();
   }, []);
   let navigate = useNavigate();
   function handleLogin(values) {
@@ -27,6 +59,8 @@ export default function Register() {
         setErrorState("");
         if (response.data.message === "success") {
           localStorage.setItem("userToken", response.data.token);
+          // localStorage.setItem("cartCounter", JSON.stringify(cartCounter));
+          // localStorage.setItem("wishListIds", JSON.stringify(wishListIds?.id));
           setUserLogin(response.data.token);
           navigate("/");
         }

@@ -1,17 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "./../../assets/freshcart-logo.svg";
 import { UserContext } from "./../../Context/UserContext";
+import { WishListContext } from "../../Context/WishListContext";
+import { cartContext } from './../../Context/CartContext';
 
 export default function Navbar() {
   let { userLogin, setUserLogin } = useContext(UserContext);
-  let navigate = useNavigate();
+ let { cartCounter, setCartCounter } = useContext(cartContext);
+ let { wishListIds, setWishListIds } = useContext(WishListContext);
+ useEffect(() => {
+   const storedWishListIds =
+     JSON?.parse(localStorage.getItem("wishListIds")) || [];
+   setWishListIds(storedWishListIds);
+ }, [setWishListIds]);
 
+  let navigate = useNavigate();
   function signOut() {
     localStorage.removeItem("userToken");
+    // localStorage.removeItem("wishListIds");
+    // localStorage.removeItem("cartCounter");
     setUserLogin(null);
     navigate("/login");
   }
+  let NumberOfWishes = wishListIds?.length;
 
   return (
     <>
@@ -22,12 +34,10 @@ export default function Navbar() {
               to=""
               className="flex mr-2 items-center space-x-3 rtl:space-x-reverse"
             >
-              <img
-                src={logo}
-                style={{ width: "120px" }}
-                className="h-8 w-full block"
-                alt="Flowbite Logo"
-              />
+              <div className="flex font-bold text-2xl md:me-2 items-center justify-center">
+                <i className="fa-solid fa-cart-shopping nav-icon text-emerald-600" />
+                <span className="h3 bold">fresh cart</span>
+              </div>
             </Link>
 
             {userLogin !== null && (
@@ -81,6 +91,18 @@ export default function Navbar() {
                       Brands
                     </NavLink>
                   </li>
+                  <li className="flex justify-center relative">
+                    <NavLink
+                      className="block   text-slate-600  rounded-sm  p-0  "
+                      aria-current="page"
+                      to="WishList"
+                    >
+                      Wish List
+                    </NavLink>
+                    <small className="text-white font-bold py-0 px-1  rounded-md  bg-emerald-600 absolute  top-[-8px] right-[-13px]">
+                      {NumberOfWishes}
+                    </small>
+                  </li>
                 </ul>
               </div>
             )}
@@ -88,21 +110,18 @@ export default function Navbar() {
 
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             <ul className="flex gap-3 items-center">
-              <li>
-                <i className="fab fa-facebook"></i>
-              </li>
-              <li>
-                <i className="fab fa-youtube"></i>
-              </li>
-              <li>
-                <i className="fab fa-linkedin"></i>
-              </li>
-              <li>
-                <i className="fab fa-twitter"></i>
-              </li>
-              <li>
-                <i className="fab fa-instagram"></i>
-              </li>
+              {userLogin != null ? (
+                <li className="relative flex">
+                  <span className="absolute top-[-12px] right-[-10px] rounded-lg block bg-emerald-600 text-white px-1">
+                    {cartCounter}
+                  </span>
+                  <Link to={"cart"}>
+                    <i className="fa-solid fa-cart-shopping text-2xl nav-icon text-emerald-600" />
+                  </Link>
+                </li>
+              ) : (
+                <i className="fa-solid fa-cart-shopping text-2xl nav-icon text-emerald-600" />
+              )}
             </ul>
             <ul className="flex gap-3 items-center">
               {userLogin !== null ? (

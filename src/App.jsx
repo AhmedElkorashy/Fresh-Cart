@@ -21,6 +21,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import CategoriesDetails from "./components/CategoriesDetails/CategoriesDetails";
 import BrandDetails from "./components/BrandDetails/BrandDetails";
+import WishListContextProvider from "./Context/WishListContext";
+import WishList from './components/WishList/WishList';
 
 let query = new QueryClient();
 
@@ -88,10 +90,18 @@ let x = createHashRouter([
         ),
       },
       {
+        path: "WishList",
+        element: (
+          <ProtectedRoute>
+            <WishList />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "BrandsDetails/:id/:category",
         element: (
           <ProtectedRoute>
-            <BrandDetails/>
+            <BrandDetails />
           </ProtectedRoute>
         ),
       },
@@ -103,13 +113,15 @@ function App() {
   return (
     <>
       <UserContextProvider>
-        <QueryClientProvider client={query}>
-          <CartContextProvider>
-            <RouterProvider router={x}></RouterProvider>
-            <Toaster />
-          </CartContextProvider>
-          <ReactQueryDevtools />
-        </QueryClientProvider>
+        <WishListContextProvider>
+          <QueryClientProvider client={query}>
+            <CartContextProvider>
+              <RouterProvider router={x}></RouterProvider>
+              <Toaster />
+            </CartContextProvider>
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </WishListContextProvider>
       </UserContextProvider>
     </>
   );

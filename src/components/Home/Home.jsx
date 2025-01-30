@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "./Home.module.css";
 import { useState } from "react";
 import RecentProduct from "./../RecentProduct/RecentProduct";

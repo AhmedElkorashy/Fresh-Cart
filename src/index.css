@@ -1,20 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*  */
 
+.notfoundBag{
+  position: absolute;
+  inset: 0;
+}
+.myShadow {
+  transition: all 0.3s ease; /* Optional: for smooth transition */
+  overflow: hidden;
+  
+}
+
+.myShadow:hover {
+  box-shadow: 0px 0px 2px 3px  rgba(0, 128, 0,.5);
+  transform: scale(1.01)
+}
+/*  */
 .active {
   @apply text-green-600 underline;
 }
 .btn {
   @apply cursor-pointer text-white bg-green-600 w-full rounded-lg py-1;
 }
-.btn-danger{
+.btn-danger {
   @apply cursor-pointer text-white bg-red-600 w-full rounded-lg py-1;
 }
 .row {
   @apply flex flex-wrap py-5 px-3;
 }
-.myFooter{
+.myFooter {
   min-height: 100vh;
 }
 .mySlider {

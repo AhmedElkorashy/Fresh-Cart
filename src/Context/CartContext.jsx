@@ -1,9 +1,16 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 // import useCardsDetails from "./../Hooks/useCardsDetails";
 
 export let cartContext = createContext();
 export default function CartContextProvider(props) {
+  const [cartCounter, setCartCounter] = useState(
+    localStorage.getItem("cartCounter")
+      ? JSON.parse(localStorage.getItem("cartCounter"))
+      : 0
+  );
+
   let headers = {
     token: localStorage.getItem("userToken"),
   };
@@ -66,6 +73,8 @@ export default function CartContextProvider(props) {
         getProductToCart,
         updateProductToCart,
         deleteProductFromCart,
+        setCartCounter,
+        cartCounter,
       }}
     >
       {props.children}

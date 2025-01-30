@@ -24,11 +24,11 @@ export default function Categories() {
   }
   return (
     <>
-      <div className="row mx-auto text-center">
+      <div className="row mx-auto text-center my-4">
         {data?.data.data.map((category) => (
           <div
             key={category?._id}
-            className="sm:w-1/2 p-6 w-full lg:w-1/4 md:w-1/3"
+            className="sm:w-1/2 rounded-lg myShadow p-6 w-full lg:w-1/4 md:w-1/3"
           >
             <Link to={`/CategoriesDetails/${category?._id}/${category.name}`}>
               <img
@@ -36,7 +36,9 @@ export default function Categories() {
                 className="w-full block h-[350px] object-cover"
                 alt=""
               />
-              <h2 className="font-bold text-emerald-600 my-3">{category?.name}</h2>
+              <h2 className="font-bold text-emerald-600 my-3">
+                {category?.name}
+              </h2>
             </Link>
           </div>
         ))}

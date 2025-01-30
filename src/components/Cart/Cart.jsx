@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 
 export default function Cart() {
   const [carts, setCarts] = useState(null);
+  // let counter = carts?.products.length;
   const [loading, setLoading] = useState(false);
   const [deleteAllSpinner, setDeleteAllSpinner] = useState(false);
   const [currentId, setCurrentId] = useState(0);
@@ -18,10 +19,15 @@ export default function Cart() {
     deleteProductFromCart,
     getProductToCart,
     updateProductToCart,
+    setCartCounter,
+    cartCounter,
   } = useContext(cartContext);
   async function clearCart() {
     setDeleteAllSpinner(true);
     let response = await deleteAllCart();
+    const counter = 0;
+    setCartCounter(counter);
+    localStorage.setItem("cartCounter", JSON.stringify(counter)); 
     // console.log(response);
     if (response.data.message === "success") {
       console.log(response);
@@ -32,18 +38,24 @@ export default function Cart() {
       toast.error("Error clearing");
     }
     setDeleteAllSpinner(false);
+    getCart(); //this line is to set the total price zero again
   }
   async function getCart() {
     let response = await getProductToCart();
     console.log(response);
     if (response.data.status === "success") {
-      // console.log(response.data.status);
+      console.log(response);
       setCarts(response.data.data);
     }
   }
   async function updateProduct(id, count) {
     setLoading(true);
     setCurrentId(id);
+    if (count === 0) {
+      let counter = 0;
+      setCartCounter(counter);
+      localStorage.setItem("CartCounter", cartCounter);
+    }
     let response = await updateProductToCart(id, count);
     // console.log(response);
     if (response.data.status === "success") {
@@ -61,6 +73,9 @@ export default function Cart() {
     let response = await deleteProductFromCart(id);
     // console.log(response);
     if (response.data.status === "success") {
+      let counter = cartCounter - 1; // Increment the counter
+      setCartCounter(counter); // Update state
+      localStorage.setItem("cartCounter", JSON.stringify(counter));
       setRemoveSpinner(false);
       setCarts(response.data.data);
       toast.success("Product Deleted successfully");

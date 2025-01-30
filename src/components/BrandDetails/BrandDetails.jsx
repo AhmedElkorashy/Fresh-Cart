@@ -36,7 +36,7 @@ export default function CategoriesDetails() {
     <>
       {BrandsState != null ? (
         <>
-          <div className="row max-w-5xl mx-auto    text-center">
+          <div className="row max-w-5xl mx-auto  my-4  text-center">
             <div className="w-full mx-auto text-center  ">
               <Slider {...settings} className="w-full mySlider">
                 <img
