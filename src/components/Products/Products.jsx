@@ -29,7 +29,7 @@ export default function Products() {
     let res = await addToWishList(id);
     if (res.data.status === "success") {
       toast.success(res.data.message);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setWishListIds(res.data.data);
       localStorage.setItem("wishListIds", JSON.stringify(res?.data.data));
     } else {

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "./../../assets/freshcart-logo.svg";
 import { UserContext } from "./../../Context/UserContext";
 import { WishListContext } from "../../Context/WishListContext";
 import { cartContext } from './../../Context/CartContext';
@@ -91,7 +90,7 @@ export default function Navbar() {
                       Brands
                     </NavLink>
                   </li>
-                  <li className="flex justify-center relative">
+                  <li className="flex justify-center w-fit mx-auto relative">
                     <NavLink
                       className="block   text-slate-600  rounded-sm  p-0  "
                       aria-current="page"
