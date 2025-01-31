@@ -73,9 +73,8 @@ export default function Products() {
     setCurrentId(id);
     let response = await addProductToCart(id);
     if (response.data.status == "success") {
-      let counter = cartCounter + 1; // Increment the counter
-      setCartCounter(counter); // Update state
-      localStorage.setItem("cartCounter", JSON.stringify(counter));
+      localStorage.setItem("cartCounter", response?.data.data.products.length);
+      setCartCounter(response?.data.data.products.length); // Update state
       setLoading(false);
       toast.success(response.data.message);
     } else {

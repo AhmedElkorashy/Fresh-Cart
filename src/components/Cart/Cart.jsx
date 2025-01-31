@@ -25,11 +25,13 @@ export default function Cart() {
   async function clearCart() {
     setDeleteAllSpinner(true);
     let response = await deleteAllCart();
-    const counter = 0;
-    setCartCounter(counter);
-    localStorage.setItem("cartCounter", JSON.stringify(counter)); 
+    // const counter = 0;
+    // setCartCounter(counter);
+    // localStorage.setItem("cartCounter", JSON.stringify(counter)); 
     // console.log(response);
     if (response.data.message === "success") {
+      localStorage.setItem("cartCounter", 0);
+      setCartCounter(0); // Update state
       console.log(response);
       toast.success("Cart deleted successfully");
       setMyState(response?.config?.method);
@@ -51,14 +53,18 @@ export default function Cart() {
   async function updateProduct(id, count) {
     setLoading(true);
     setCurrentId(id);
-    if (count === 0) {
-      let counter = 0;
-      setCartCounter(counter);
-      localStorage.setItem("CartCounter", cartCounter);
-    }
+    // if (count === 0) {
+    //   let counter = 0;
+    //   setCartCounter(counter);
+    //   localStorage.setItem("cartCounter", counter);
+    // }
     let response = await updateProductToCart(id, count);
-    // console.log(response);
+    console.log(response);
+    //  localStorage.setItem("cartCounter", response?.data.data.products.length);
+
     if (response.data.status === "success") {
+      localStorage.setItem("cartCounter", response?.data.data.products.length);
+      setCartCounter(response?.data.data.products.length); // Update state
       setLoading(false);
       setCarts(response.data.data);
       toast.success("Product Updated successfully");
@@ -73,9 +79,9 @@ export default function Cart() {
     let response = await deleteProductFromCart(id);
     // console.log(response);
     if (response.data.status === "success") {
-      let counter = cartCounter - 1; // Increment the counter
-      setCartCounter(counter); // Update state
-      localStorage.setItem("cartCounter", JSON.stringify(counter));
+      // let counter = cartCounter - 1; // Increment the counter
+      localStorage.setItem("cartCounter", response?.data.data.products.length);
+      setCartCounter(response?.data.data.products.length); // Update state
       setRemoveSpinner(false);
       setCarts(response.data.data);
       toast.success("Product Deleted successfully");

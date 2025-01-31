@@ -5,7 +5,7 @@ import { WishListContext } from "../../Context/WishListContext";
 import Slider from "react-slick";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { cartContext } from './../../Context/CartContext';
+import { cartContext } from "./../../Context/CartContext";
 export default function WishList() {
   let { getWishList, setWishListIds, wishListIds, removeFromWishList } =
     useContext(WishListContext);
@@ -41,9 +41,8 @@ export default function WishList() {
     setCurrentId(id);
     let response = await addProductToCart(id);
     if (response.data.status == "success") {
-       let counter = cartCounter + 1; // Increment the counter
-       setCartCounter(counter); // Update state
-       localStorage.setItem("cartCounter", JSON.stringify(counter));
+      localStorage.setItem("cartCounter", response?.data.data.products.length);
+      setCartCounter(response?.data.data.products.length); // Update state
       setLoading(false);
       toast.success(response.data.message);
     } else {
@@ -113,10 +112,10 @@ export default function WishList() {
                             onClick={() => {
                               removeFromWishListBridge(product.id);
                             }}
-                            className="font-medium cursor-pointer text-red-600 dark:text-red-500 hover:underline"
+                            className="font-medium cursor-pointer text-red-600 dark:text-red-500 hover:underline "
                           >
                             {removeSpinner && currentId === product.id ? (
-                              <i className="fas fa-spinner fa-spin"></i>
+                              <i className="fas fa-spinner fa-spin "></i>
                             ) : (
                               "Remove"
                             )}

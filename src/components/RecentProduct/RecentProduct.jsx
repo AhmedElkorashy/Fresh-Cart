@@ -27,9 +27,9 @@ export default function RecentProduct() {
 
   async function addToWishListBridge(id) {
     let res = await addToWishList(id);
+    // console.log(res.data.data);
     if (res.data.status === "success") {
       toast.success(res.data.message);
-      // console.log(res.data.data);
       setWishListIds(res.data.data);
       localStorage.setItem("wishListIds", JSON.stringify(res?.data.data));
     } else {
@@ -50,12 +50,14 @@ export default function RecentProduct() {
   async function getWishListBridge() {
     let res = await getWishList();
     // console.log(res);
+    // localStorage.setItem("wishListIds", JSON.stringify(res?.data.data));
     setWishListIds(res?.data?.data);
   }
   useEffect(() => {
     const savedCounter = JSON.parse(localStorage.getItem("cartCounter")) || 0;
     setCartCounter(savedCounter);
     getWishListBridge();
+    // setWishListIds(JSON.parse(localStorage.getItem("wishListIds"));)
   }, []);
   if (isError) {
     return <h3 className="bg-red-500">{error}</h3>;
@@ -71,10 +73,11 @@ export default function RecentProduct() {
     setLoading(true);
     setCurrentId(id);
     let response = await addProductToCart(id);
+    // console.log(response?.data?.data?.products);
+
     if (response.data.status == "success") {
-      let counter = cartCounter + 1; // Increment the counter
-      setCartCounter(counter); // Update state
-      localStorage.setItem("cartCounter", JSON.stringify(counter));
+      localStorage.setItem("cartCounter", response?.data.data.products.length);
+      setCartCounter(response?.data.data.products.length); // Update state
       setLoading(false);
       toast.success(response.data.message);
     } else {

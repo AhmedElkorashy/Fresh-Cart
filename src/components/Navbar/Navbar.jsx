@@ -2,23 +2,21 @@ import React, { useContext, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "./../../Context/UserContext";
 import { WishListContext } from "../../Context/WishListContext";
-import { cartContext } from './../../Context/CartContext';
+import { cartContext } from "./../../Context/CartContext";
 
 export default function Navbar() {
   let { userLogin, setUserLogin } = useContext(UserContext);
- let { cartCounter, setCartCounter } = useContext(cartContext);
- let { wishListIds, setWishListIds } = useContext(WishListContext);
- useEffect(() => {
-   const storedWishListIds =
-     JSON?.parse(localStorage.getItem("wishListIds")) || [];
-   setWishListIds(storedWishListIds);
- }, [setWishListIds]);
+  let { cartCounter, setCartCounter } = useContext(cartContext);
+  let { wishListIds, setWishListIds } = useContext(WishListContext);
+  useEffect(() => {
+    setCartCounter(JSON.parse(localStorage.getItem("cartCounter")));
+    setWishListIds(JSON.parse(localStorage.getItem("wishListIds")));
+  }, [setCartCounter]);
 
   let navigate = useNavigate();
   function signOut() {
     localStorage.removeItem("userToken");
-    // localStorage.removeItem("wishListIds");
-    // localStorage.removeItem("cartCounter");
+
     setUserLogin(null);
     navigate("/login");
   }
@@ -26,7 +24,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 right-0 left-0 z-50 border-gray-200 bg-slate-300">
+      <nav className="fixed top-0 right-0  left-0 z-50 border-gray-200 bg-slate-300">
         <div className="max-w-screen-xl mb-11 md:mb-0 flex flex-wrap items-center justify-between mx-auto p-4 bg-slate-300 md:bg-transparent">
           <div className="flex items-center px-4  ">
             <Link
@@ -111,7 +109,7 @@ export default function Navbar() {
             <ul className="flex gap-3 items-center">
               {userLogin != null ? (
                 <li className="relative flex">
-                  <span className="absolute top-[-12px] right-[-10px] rounded-lg block bg-emerald-600 text-white px-1">
+                  <span className="absolute top-[-12px] right-[-10px] py-0 px-1 rounded-lg block bg-emerald-600 text-white ">
                     {cartCounter}
                   </span>
                   <Link to={"cart"}>
