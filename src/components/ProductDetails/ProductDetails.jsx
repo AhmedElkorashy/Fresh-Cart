@@ -154,7 +154,7 @@ export default function ProductDetails() {
                   <i className="fa-solid fa-heart m-0  "></i>
                 </button>
                 {/*  */}
-                <i className="fas fa-star text-yellow-300"></i>
+                <i className="fas fa-star text-yellow-300 ms-2"></i>
                 {product?.ratingsAverage}{" "}
               </h4>
             </div>
