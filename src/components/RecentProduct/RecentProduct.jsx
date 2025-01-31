@@ -16,6 +16,7 @@ export default function RecentProduct() {
     useContext(cartContext);
   const [loading, setLoading] = useState(false);
   const [currentId, setCurrentId] = useState(0);
+  const [searchProducts, setSearchProducts] = useState([]);
 
   let {
     addToWishList,
@@ -57,8 +58,11 @@ export default function RecentProduct() {
     const savedCounter = JSON.parse(localStorage.getItem("cartCounter")) || 0;
     setCartCounter(savedCounter);
     getWishListBridge();
+    setSearchProducts(data?.data?.data);
+    console.log(searchProducts);
+
     // setWishListIds(JSON.parse(localStorage.getItem("wishListIds"));)
-  }, []);
+  }, [data]);
   if (isError) {
     return <h3 className="bg-red-500">{error}</h3>;
   }
@@ -88,67 +92,87 @@ export default function RecentProduct() {
 
   return (
     <>
+      <form className="max-w-lg mx-auto ">
+        <div className="py-4">
+          <input
+            onInput={(e) => {
+              // var regex = new RegExp(e.target.value, "gi");
+              const inputValue = e.target.value.toLowerCase();
+              const filteredProducts = data?.data?.data.filter((item) =>
+                item.title.toLowerCase().includes(inputValue)
+              );
+              setSearchProducts(filteredProducts);
+              console.log(filteredProducts);
+            }}
+            type="text"
+            id="search"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+          />
+        </div>
+      </form>
       <div className="row ">
-        {data?.data?.data.map((product) => (
-          <div
-            key={product.id}
-            className="md:w-1/5 rounded-lg myShadow lg:w-1/6 sm:w-1/3"
-          >
-            <div className="product p-3 relative">
-              <div className="absolute top-[30px] right-[30px]">
-                <button
-                  style={{
-                    color: JSON?.parse(
-                      localStorage.getItem("wishListIds")
-                    )?.includes(product.id)
-                      ? "red"
-                      : "rgba(0,0,0,.8)",
-                  }}
-                  onClick={() =>
-                    JSON.parse(localStorage.getItem("wishListIds"))?.includes(
-                      product.id
-                    )
-                      ? removeFromWishListBridge(product.id)
-                      : addToWishListBridge(product.id)
-                  }
-                  className={` w-25 m-0  `}
-                >
-                  <i className="fa-solid fa-heart m-0  "></i>
-                </button>
-              </div>
-              <Link
-                to={`productDetails/${product.id}/${product.category.name}`}
+        {searchProducts == [] && searchProducts.length !== 0
+          ? data?.data?.data
+          : searchProducts?.map((product) => (
+              <div
+                key={product.id}
+                className="md:w-1/5 rounded-lg myShadow lg:w-1/6 sm:w-1/3"
               >
-                <img src={product.imageCover} className="w-full" alt="" />
-                <h3 className="text-green-500 text-left">
-                  {product.category.name}
-                </h3>
-                <h3 className="font-semibold text-left truncate">
-                  {product.title.split(" ").slice(0, 2).join(" ")}
-                </h3>
-                <div className="flex justify-between">
-                  <span>{product.price} EGP</span>
-                  <span>
-                    <i className="fas fa-star text-yellow-400"></i>{" "}
-                    {product.ratingsAverage}
-                  </span>
+                <div className="product p-3 relative">
+                  <div className="absolute top-[30px] right-[30px]">
+                    <button
+                      style={{
+                        color: JSON?.parse(
+                          localStorage.getItem("wishListIds")
+                        )?.includes(product.id)
+                          ? "red"
+                          : "rgba(0,0,0,.8)",
+                      }}
+                      onClick={() =>
+                        JSON.parse(
+                          localStorage.getItem("wishListIds")
+                        )?.includes(product.id)
+                          ? removeFromWishListBridge(product.id)
+                          : addToWishListBridge(product.id)
+                      }
+                      className={` w-25 m-0  `}
+                    >
+                      <i className="fa-solid fa-heart m-0  "></i>
+                    </button>
+                  </div>
+                  <Link
+                    to={`productDetails/${product.id}/${product.category.name}`}
+                  >
+                    <img src={product.imageCover} className="w-full" alt="" />
+                    <h3 className="text-green-500 text-left">
+                      {product.category.name}
+                    </h3>
+                    <h3 className="font-semibold text-left truncate">
+                      {product.title.split(" ").slice(0, 2).join(" ")}
+                    </h3>
+                    <div className="flex justify-between">
+                      <span>{product.price} EGP</span>
+                      <span>
+                        <i className="fas fa-star text-yellow-400"></i>{" "}
+                        {product.ratingsAverage}
+                      </span>
+                    </div>
+                  </Link>
+                  <button
+                    onClick={() => {
+                      addToCart(product.id);
+                    }}
+                    className="btn"
+                  >
+                    {loading && currentId == product.id ? (
+                      <i className="fas fa-spinner fa-spin"></i>
+                    ) : (
+                      " Add to Card"
+                    )}
+                  </button>
                 </div>
-              </Link>
-              <button
-                onClick={() => {
-                  addToCart(product.id);
-                }}
-                className="btn"
-              >
-                {loading && currentId == product.id ? (
-                  <i className="fas fa-spinner fa-spin"></i>
-                ) : (
-                  " Add to Card"
-                )}
-              </button>
-            </div>
-          </div>
-        ))}
+              </div>
+            ))}
       </div>
     </>
   );

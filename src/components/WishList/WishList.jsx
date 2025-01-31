@@ -57,6 +57,8 @@ export default function WishList() {
   }, [wishListIds]);
   return (
     <>
+    
+
       {wishListIds != null ? (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-6">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

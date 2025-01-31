@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "./../../Context/UserContext";
 import { WishListContext } from "../../Context/WishListContext";
@@ -8,6 +8,7 @@ export default function Navbar() {
   let { userLogin, setUserLogin } = useContext(UserContext);
   let { cartCounter, setCartCounter } = useContext(cartContext);
   let { wishListIds, setWishListIds } = useContext(WishListContext);
+  const [menuOpen, setMenuOpen] = useState(false); // state to manage menu visibility
   useEffect(() => {
     setCartCounter(JSON.parse(localStorage.getItem("cartCounter")));
     setWishListIds(JSON.parse(localStorage.getItem("wishListIds")));
@@ -21,7 +22,9 @@ export default function Navbar() {
     navigate("/login");
   }
   let NumberOfWishes = wishListIds?.length;
-
+  const toggleMenu = () => {
+    setMenuOpen((prevState) => !prevState); // toggle the menu state
+  };
   return (
     <>
       <nav className="fixed top-0 right-0  left-0 z-50 border-gray-200 bg-slate-300">
@@ -140,6 +143,7 @@ export default function Navbar() {
             </ul>
           </div>
           <button
+            onClick={toggleMenu}
             data-collapse-toggle="navbar-default"
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
