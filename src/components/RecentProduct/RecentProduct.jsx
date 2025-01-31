@@ -111,7 +111,7 @@ export default function RecentProduct() {
                       ? removeFromWishListBridge(product.id)
                       : addToWishListBridge(product.id)
                   }
-                  className={`heart-btn w-25 m-0  `}
+                  className={` w-25 m-0  `}
                 >
                   <i className="fa-solid fa-heart m-0  "></i>
                 </button>

@@ -133,10 +133,32 @@ export default function ProductDetails() {
             <div className="flex justify-between items-center ">
               <h4>{product?.price} EGP</h4>
               <h4>
+                {/*  */}
+                <button
+                  style={{
+                    color: JSON.parse(
+                      localStorage.getItem("wishListIds")
+                    )?.includes(product?.id)
+                      ? "red"
+                      : "rgba(0,0,0,.8)",
+                  }}
+                  onClick={() =>
+                    JSON.parse(localStorage.getItem("wishListIds"))?.includes(
+                      product.id
+                    )
+                      ? removeFromWishListBridge(product.id)
+                      : addToWishListBridge(product.id)
+                  }
+                  className={` w-25 m-0  `}
+                >
+                  <i className="fa-solid fa-heart m-0  "></i>
+                </button>
+                {/*  */}
                 <i className="fas fa-star text-yellow-300"></i>
                 {product?.ratingsAverage}{" "}
               </h4>
             </div>
+
             <button
               onClick={() => {
                 addToCart(product.id);
@@ -158,7 +180,21 @@ export default function ProductDetails() {
       )}
 
       {/* ************************** */}
-
+      <div className="row">
+        {product?.images.map((src, i) => (
+          <div
+            key={i}
+            className="flex flex-wrap sm:w-1/5 py-2 px-3 myShadow rounded-lg cursor-pointer"
+          >
+            <img
+              className="w-full object-cover"
+              src={src}
+              alt={`Product Image ${i + 1}`}
+            />
+          </div>
+        ))}
+      </div>
+      {/* ************************** */}
       <div className="row ">
         {relatedProducts.length > 0
           ? relatedProducts.map((product) => (
@@ -183,7 +219,7 @@ export default function ProductDetails() {
                           ? removeFromWishListBridge(product.id)
                           : addToWishListBridge(product.id)
                       }
-                      className={`heart-btn w-25 m-0  `}
+                      className={` w-25 m-0  `}
                     >
                       <i className="fa-solid fa-heart m-0  "></i>
                     </button>
