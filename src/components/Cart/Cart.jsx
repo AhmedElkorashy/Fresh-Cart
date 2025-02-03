@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { cartContext } from "../../Context/CartContext";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const [carts, setCarts] = useState(null);
@@ -21,13 +22,14 @@ export default function Cart() {
     updateProductToCart,
     setCartCounter,
     cartCounter,
+    setCartId,
   } = useContext(cartContext);
   async function clearCart() {
     setDeleteAllSpinner(true);
     let response = await deleteAllCart();
     // const counter = 0;
     // setCartCounter(counter);
-    // localStorage.setItem("cartCounter", JSON.stringify(counter)); 
+    // localStorage.setItem("cartCounter", JSON.stringify(counter));
     // console.log(response);
     if (response.data.message === "success") {
       localStorage.setItem("cartCounter", 0);
@@ -44,9 +46,10 @@ export default function Cart() {
   }
   async function getCart() {
     let response = await getProductToCart();
-    console.log(response);
+    // console.log(response?.data.cartId);
     if (response.data.status === "success") {
-      console.log(response);
+      setCartId(response?.data.cartId);
+
       setCarts(response.data.data);
     }
   }
@@ -237,23 +240,29 @@ export default function Cart() {
                 )}
               </tbody>
             </table>
+            {carts?.products?.length > 0 && (
+              <div className="flex flex-wrap px-2 mx-auto  justify-center sm:justify-between">
+                <button
+                  onClick={() => {
+                    clearCart();
+                  }}
+                  className="btn-danger md:mx-auto     my-4 font-bold md:max-w-xs max-w-full"
+                >
+                  {deleteAllSpinner ? (
+                    <i className="fas fa-spinner fa-spin"></i>
+                  ) : (
+                    "Delete All"
+                  )}
+                </button>
+                <Link
+                  to={"/payment"}
+                  className="btn-info  md:mx-auto    my-4 font-bold md:max-w-xs max-w-full"
+                >
+                  Pay All
+                </Link>
+              </div>
+            )}
           </div>
-          {carts?.products?.length > 0 && (
-            <div className="text-start">
-              <button
-                onClick={() => {
-                  clearCart();
-                }}
-                className="btn-danger my-4 font-bold max-w-sm "
-              >
-                {deleteAllSpinner ? (
-                  <i className="fas fa-spinner fa-spin"></i>
-                ) : (
-                  "Delete All"
-                )}
-              </button>
-            </div>
-          )}
         </>
       ) : (
         <div className="flex items-center justify-center fixed inset-0">

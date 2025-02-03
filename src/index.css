@@ -27,6 +27,9 @@
 .btn-danger {
   @apply cursor-pointer text-white bg-red-600 w-full rounded-lg py-1;
 }
+.btn-info {
+  @apply cursor-pointer text-white bg-blue-600 w-full rounded-lg py-1;
+}
 .row {
   @apply flex flex-wrap py-5 px-3;
 }

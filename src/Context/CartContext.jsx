@@ -10,6 +10,7 @@ export default function CartContextProvider(props) {
       ? JSON.parse(localStorage.getItem("cartCounter"))
       : 0
   );
+  const [cartId, setCartId] = useState(null);
 
   let headers = {
     token: localStorage.getItem("userToken"),
@@ -25,7 +26,7 @@ export default function CartContextProvider(props) {
           headers,
         }
       )
-      .then((Response) => Response)
+      .then((Response) => Response )
       .catch((err) => err);
   }
   function getProductToCart() {
@@ -75,6 +76,8 @@ export default function CartContextProvider(props) {
         deleteProductFromCart,
         setCartCounter,
         cartCounter,
+        setCartId,
+        cartId,
       }}
     >
       {props.children}

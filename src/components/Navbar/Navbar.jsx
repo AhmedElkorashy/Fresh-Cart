@@ -102,6 +102,14 @@ export default function Navbar() {
                     {NumberOfWishes}
                   </small>
                 </li>
+                <li>
+                  <NavLink
+                    className="block text-slate-600 rounded-sm p-0"
+                    to="allorders"
+                  >
+                    All Orders
+                  </NavLink>
+                </li>
               </ul>
             </div>
           )}

@@ -23,6 +23,8 @@ import CategoriesDetails from "./components/CategoriesDetails/CategoriesDetails"
 import BrandDetails from "./components/BrandDetails/BrandDetails";
 import WishListContextProvider from "./Context/WishListContext";
 import WishList from './components/WishList/WishList';
+import Payment from './components/Payment/Payment';
+import AllOrders from './components/AllOrders/AllOrders';
 
 let query = new QueryClient();
 
@@ -102,6 +104,22 @@ let x = createHashRouter([
         element: (
           <ProtectedRoute>
             <BrandDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "allorders",
+        element: (
+          <ProtectedRoute>
+            <AllOrders />
           </ProtectedRoute>
         ),
       },
