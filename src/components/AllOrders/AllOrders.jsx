@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
 export default function AllOrders() {
-   useEffect(() => {
-     document.title = "All Orders";
-   }, []);
+  useEffect(() => {
+    document.title = "All Orders";
+  }, []);
   const { id } = jwtDecode(localStorage.getItem("userToken"));
 
   async function getAllOrders() {
@@ -31,7 +31,7 @@ export default function AllOrders() {
       </div>
     );
   }
- 
+
   return (
     <div className="my-7">
       <div className="row">
@@ -61,7 +61,9 @@ export default function AllOrders() {
             </div>
           ))
         ) : (
-          <div className="text-emerald-600">No orders found.</div>
+          <div className="p-2 capitalize my-4 text-sm text-red-800 rounded-lg bg-red-50">
+            <small className="font-medium"> No orders found.</small>
+          </div>
         )}
       </div>
     </div>
