@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
 export default function AllOrders() {
+   useEffect(() => {
+     document.title = "All Orders";
+   }, []);
   const { id } = jwtDecode(localStorage.getItem("userToken"));
 
   async function getAllOrders() {
@@ -28,9 +31,7 @@ export default function AllOrders() {
       </div>
     );
   }
-  useEffect(() => {
-    document.title = "All Orders";
-  }, []);
+ 
   return (
     <div className="my-7">
       <div className="row">
