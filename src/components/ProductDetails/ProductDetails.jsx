@@ -16,6 +16,7 @@ export default function ProductDetails() {
   let { id, category } = useParams();
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [backgroundImage, setBackgroundImage] = useState();
   const [loading, setLoading] = useState(false);
   const [currentId, setCurrentId] = useState(0);
   let { addProductToCart, setCartCounter, cartCounter } =
@@ -55,7 +56,7 @@ export default function ProductDetails() {
         let res = response.data.data.filter(
           (product) => product.category.name === category
         );
-        console.log(res);
+        // console.log(res);
         setRelatedProducts(res);
       })
       .catch((error) => {});
@@ -95,7 +96,15 @@ export default function ProductDetails() {
     } else {
       toast.error(res.data.message);
     }
-    // console.log(res.data);
+  }
+  function lightContainerImage(e) {
+    // e.stopPropagation();
+    setBackgroundImage(e.target.getAttribute("src"));
+    document.querySelector(".light-container").classList.remove("hidden");
+  }
+  function CloseLightContainer(e) {
+    // e.stopPropagation();
+    document.querySelector(".light-container").classList.add("hidden");
   }
   useEffect(() => {
     getProduct(id);
@@ -153,7 +162,6 @@ export default function ProductDetails() {
                 >
                   <i className="fa-solid fa-heart m-0  "></i>
                 </button>
-                {/*  */}
                 <i className="fas fa-star text-yellow-300 ms-2"></i>
                 {product?.ratingsAverage}{" "}
               </h4>
@@ -186,14 +194,42 @@ export default function ProductDetails() {
             key={i}
             className="flex flex-wrap sm:w-1/5 py-2 px-3 myShadow rounded-lg cursor-pointer"
           >
-            <img
-              className="w-full object-cover"
-              src={src}
-              alt={`Product Image ${i + 1}`}
-            />
+            <div>
+              <img
+                onClick={(e) => {
+                  lightContainerImage(e);
+                }}
+                className="w-full object-cover"
+                src={src}
+                alt={`Product Image ${i + 1}`}
+              />
+            </div>
           </div>
         ))}
       </div>
+      <di
+        onClick={CloseLightContainer}
+        className="light-container   hidden  flex justify-center  items-center"
+      >
+        <div className=" ">
+          <div className="relative    mx-auto">
+            <i
+              onClick={(e) => {
+                CloseLightContainer(e);
+              }}
+              className="fa-solid fa-xmark absolute top-[10px] right-[10px] text-white cursor-pointer bg-slate-500 rounded-full p-1 "
+            ></i>
+            <img
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              src={backgroundImage}
+              className="w-[450px] mx-auto  object-cover"
+              alt=""
+            />
+          </div>
+        </div>
+      </di>
       {/* ************************** */}
       <div className="row ">
         {relatedProducts.length > 0
