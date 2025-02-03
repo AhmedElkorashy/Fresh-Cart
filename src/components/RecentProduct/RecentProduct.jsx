@@ -102,7 +102,7 @@ export default function RecentProduct() {
                 item.title.toLowerCase().includes(inputValue)
               );
               setSearchProducts(filteredProducts);
-              console.log(filteredProducts);
+              // console.log(filteredProducts);
             }}
             type="text"
             id="search"
