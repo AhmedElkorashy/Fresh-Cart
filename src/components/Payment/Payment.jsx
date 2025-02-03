@@ -72,8 +72,8 @@ export default function Payment() {
         }
       );
       if (x?.data.status === "success") {
-        // localStorage.setItem("cartCounter", 0);
-        // setCartCounter(0); // Update state
+        localStorage.setItem("cartCounter", 0);
+        setCartCounter(0); // Update state
         toast.success("Cart Ordered successfully");
         window.open(x.data.session.url);
       }
