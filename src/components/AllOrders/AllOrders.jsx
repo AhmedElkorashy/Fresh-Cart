@@ -39,7 +39,7 @@ export default function AllOrders() {
           data.data.map((item, i) => (
             <div
               key={i}
-              className="w-1/4 font-semibold cursor-pointer p-6  rounded-lg myShadow  mb-3  mx-auto"
+              className="sm:w-1/4  font-semibold cursor-pointer p-6  rounded-lg myShadow  mb-3  mx-auto"
             >
               <div className="row">
                 {item?.cartItems?.map((orders, index) => (
