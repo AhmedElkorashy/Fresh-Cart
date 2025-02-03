@@ -4,7 +4,7 @@ import style from "./AllOrders.module.css";
 import { jwtDecode } from "jwt-decode";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
+import { useEffect } from "react";
 export default function AllOrders() {
   const { id } = jwtDecode(localStorage.getItem("userToken"));
 
@@ -28,7 +28,9 @@ export default function AllOrders() {
       </div>
     );
   }
-
+  useEffect(() => {
+    document.title = "All Orders";
+  }, []);
   return (
     <div className="my-7">
       <div className="row">
@@ -41,14 +43,20 @@ export default function AllOrders() {
               <div className="row">
                 {item?.cartItems?.map((orders, index) => (
                   <div key={index} className="p-2 w-1/2">
-                    <img src={orders?.product.imageCover} className="w-full" alt="" />
+                    <img
+                      src={orders?.product.imageCover}
+                      className="w-full"
+                      alt=""
+                    />
                   </div>
                 ))}
               </div>
-                <h2 className="capitalize">
-                  total order price: {item?.totalOrderPrice} EGP
-                </h2>
-                <h2 className="capitalize">payment method: {item?.paymentMethodType}</h2>
+              <h2 className="capitalize">
+                total order price: {item?.totalOrderPrice} EGP
+              </h2>
+              <h2 className="capitalize">
+                payment method: {item?.paymentMethodType}
+              </h2>
             </div>
           ))
         ) : (

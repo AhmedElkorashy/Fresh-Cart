@@ -59,7 +59,7 @@ export default function RecentProduct() {
     setCartCounter(savedCounter);
     getWishListBridge();
     setSearchProducts(data?.data?.data);
-    console.log(searchProducts);
+    // console.log(searchProducts);
 
     // setWishListIds(JSON.parse(localStorage.getItem("wishListIds"));)
   }, [data]);
