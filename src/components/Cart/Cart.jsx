@@ -101,7 +101,7 @@ export default function Cart() {
     <>
       {carts?.products != null || myState === "delete" ? (
         <>
-          <h2 className="text-2xl text-center text-gray-700 font-bold my-4">
+          <h2 className="text-2xl text-center mt-5 text-gray-700 font-bold my-4">
             Total Price:
             <span className="text-emerald-600"> {carts?.totalCartPrice}</span>
           </h2>
