@@ -61,7 +61,7 @@ export default function AllOrders() {
             </div>
           ))
         ) : (
-          <div className="p-2 capitalize my-4 text-sm text-red-800 rounded-lg bg-red-50">
+          <div className="p-2 capitalize my-4 max-w-xl mx-auto text-sm text-red-800 rounded-lg bg-red-50">
             <small className="font-medium"> No orders found.</small>
           </div>
         )}
