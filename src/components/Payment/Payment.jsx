@@ -67,7 +67,7 @@ export default function Payment() {
           headers,
 
           params: {
-            url: "https://fresh-cart-nine-theta.vercel.app/#/",
+            url: "https://fresh-cart-nine-theta.vercel.app/#",
           },
         }
       );
