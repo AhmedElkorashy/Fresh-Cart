@@ -4,6 +4,7 @@ import style from "./Payment.module.css";
 import { cartContext } from "../../Context/CartContext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useEffect } from 'react';
 export default function Payment() {
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
@@ -86,6 +87,9 @@ export default function Payment() {
     }
     // console.log(values);
   }
+  useEffect(()=>{
+    document.title="All Orders"
+  },[])
   return (
     <div className="py-10 md:w-[60%] px-5 mx-auto my-5">
       <div className="relative z-0 w-full mb-5 group">
