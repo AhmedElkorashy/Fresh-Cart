@@ -39,7 +39,7 @@ export default function Payment() {
         setCartCounter(0); // Update state
         toast.success("Cart Ordered successfully");
       }
-      console.log(x);
+      // console.log(x);
     } catch (error) {
       toast.error("Request failed with status code 404");
       console.log(error);
@@ -90,6 +90,7 @@ export default function Payment() {
  
   return (
     <div className="py-10 md:w-[60%] px-5 mx-auto my-5">
+      <h2 className="capitalize text-2xl font-bold text-emerald-600 my-3">Check out</h2>
       <div className="relative z-0 w-full mb-5 group">
         <input
           onChange={(e) => {
