@@ -13,7 +13,7 @@ export default function Brands() {
     queryKey: ["brands"],
     queryFn: getAllBrands,
   });
-  console.log(data?.data?.data);
+  // console.log(data?.data?.data);
 
   useEffect(() => {
     document.title = "Brands";

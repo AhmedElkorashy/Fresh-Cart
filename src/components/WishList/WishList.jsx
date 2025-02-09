@@ -2,7 +2,6 @@
 import React, { useContext, useEffect } from "react";
 import style from "./WishList.module.css";
 import { WishListContext } from "../../Context/WishListContext";
-import Slider from "react-slick";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { cartContext } from "./../../Context/CartContext";
@@ -17,7 +16,7 @@ export default function WishList() {
 
   async function getWishListBridge() {
     let res = await getWishList();
-    console.log(res);
+    // console.log(res);
     setWishListIds(res?.data?.data);
   }
   async function removeFromWishListBridge(id) {

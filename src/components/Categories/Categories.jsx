@@ -8,7 +8,7 @@ import useCategories from "./../../Hooks/useCategories";
 
 export default function Categories() {
   let { isLoading, error, data } = useCategories();
-  console.log(data?.data?.data);
+  // console.log(data?.data?.data);
   useEffect(() => {
     document.title = "Categories";
   }, []);

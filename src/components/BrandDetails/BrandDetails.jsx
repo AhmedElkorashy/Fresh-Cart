@@ -22,11 +22,11 @@ export default function CategoriesDetails() {
     axios
       .get(`https://ecommerce.routemisr.com/api/v1/brands/${id}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setBrandsState(response?.data?.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
   useEffect(() => {
