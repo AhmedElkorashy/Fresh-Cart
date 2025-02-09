@@ -22,7 +22,7 @@ export default function AllOrders() {
     queryFn: getAllOrders,
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) {
     return (
