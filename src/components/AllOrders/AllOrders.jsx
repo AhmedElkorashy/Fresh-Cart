@@ -34,7 +34,7 @@ export default function AllOrders() {
 
   return (
     <div className="my-7">
-      <h2 className="capitalize text-2xl font-bold text-emerald-600 my-3">All Orders</h2>
+      <h2 className="uppercase text-2xl font-bold text-emerald-600 my-3">All Orders</h2>
       <div className="row">
         {data?.data && data.data.length > 0 ? (
           data.data.map((item, i) => (

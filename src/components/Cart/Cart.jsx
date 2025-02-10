@@ -34,7 +34,7 @@ export default function Cart() {
     if (response.data.message === "success") {
       localStorage.setItem("cartCounter", 0);
       setCartCounter(0); // Update state
-      console.log(response);
+      // console.log(response);
       toast.success("Cart deleted successfully");
       setMyState(response?.config?.method);
       setCarts(response.data.data);

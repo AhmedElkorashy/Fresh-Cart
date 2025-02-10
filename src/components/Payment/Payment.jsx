@@ -12,7 +12,8 @@ export default function Payment() {
   const [paymentSpinner, setPaymentSpinner] = useState(false);
   const [paymentSpinnerOnline, setPaymentSpinnerOnline] = useState(false);
   let { cartId, setCartCounter } = useContext(cartContext);
-  console.log(cartId);
+
+  // console.log(cartId);
 
   async function getDetails() {
     let headers = {
@@ -27,6 +28,10 @@ export default function Payment() {
       },
     };
     try {
+      if (!details || !phone || !city) {
+        toast.error("Please fill all the fields");
+        return;
+      }
       let x = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
         { values },
@@ -61,6 +66,10 @@ export default function Payment() {
       },
     };
     try {
+      if (!details || !phone || !city) {
+        toast.error("Please fill all the fields");
+        return;
+      }
       let x = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}`,
         { values },
@@ -87,10 +96,12 @@ export default function Payment() {
     }
     // console.log(values);
   }
- 
+
   return (
     <div className="py-10 md:w-[60%] px-5 mx-auto my-5">
-      <h2 className="capitalize text-2xl font-bold text-emerald-600 my-3">Check out</h2>
+      <h2 className=" uppercase text-2xl font-bold text-emerald-600 my-3">
+        Checkout
+      </h2>
       <div className="relative z-0 w-full mb-5 group">
         <input
           onChange={(e) => {
