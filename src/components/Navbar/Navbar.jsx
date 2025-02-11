@@ -37,7 +37,7 @@ export default function Navbar() {
           >
             <div className="flex font-bold text-2xl md:me-2 items-center justify-center">
               <i className="fa-solid fa-cart-shopping nav-icon text-emerald-600" />
-              <span className="h3 bold">fresh cart</span>
+              <span className="h3 font-bold hidden sm:block">fresh cart</span>
             </div>
           </Link>
           {userLogin !== null && (
