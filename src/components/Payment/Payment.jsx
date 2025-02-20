@@ -85,7 +85,7 @@ export default function Payment() {
         localStorage.setItem("cartCounter", 0);
         setCartCounter(0); // Update state
         toast.success("Cart Ordered successfully");
-        window.open(x.data.session.url);
+        window.open(x.data.session.url,"_self");
       }
       // console.log(x?.data.session.url);
     } catch (error) {
