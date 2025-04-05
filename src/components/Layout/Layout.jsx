@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <>
       <Navbar />
-      <div className="container w-[80%] myFooter mx-auto mt-10 sm:mt-0   py-20 lg:py-12  ">
+      <div className="container w-[80%] myFooter mx-auto mt-10 md:mt-0   py-20 lg:py-12  ">
         <Outlet />
       </div>
       <Footer />
