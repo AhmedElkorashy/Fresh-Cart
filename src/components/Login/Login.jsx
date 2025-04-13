@@ -156,7 +156,7 @@ export default function Register() {
             type="submit"
             className="text-white text-left block bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 "
           >
-            {loading ? <i className="fas fa-spinner fa-spin"></i> : "Login"}
+            {loading ? <i className="fas fa-spinner fa-spin"></i> : "Log-in"}
           </button>
           <Link to="/register">
             <span className="capitalize text-green-500 underline">

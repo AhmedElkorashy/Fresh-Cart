@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "./../../Context/UserContext";
 import { WishListContext } from "../../Context/WishListContext";
@@ -36,8 +36,8 @@ export default function Navbar() {
             className="flex mr-2 items-center space-x-3 rtl:space-x-reverse"
           >
             <div className="flex font-bold text-2xl md:me-2 items-center justify-center">
-              <i className="fa-solid fa-cart-shopping nav-icon text-emerald-600" />
-              <span className="h3 font-bold hidden sm:block">fresh cart</span>
+              <i className="fa-solid fa-cart-shopping nav-icon text-emerald-600 " />
+              <span className="h3 font-bold ">Fresh Cart</span>
             </div>
           </Link>
           {userLogin !== null && (
