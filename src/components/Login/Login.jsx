@@ -151,16 +151,21 @@ export default function Register() {
             </div>
           ) : null}
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center justify-between">
           <button
             type="submit"
             className="text-white text-left block bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 "
           >
             {loading ? <i className="fas fa-spinner fa-spin"></i> : "Log-in"}
           </button>
-          <Link to="/register">
-            <span className="capitalize text-green-500 underline">
+          {/* <Link to="/register">
+            <span className="capitalize text-green-500 underline border-2">
               iF you do nt have an account Register Now
+            </span>
+          </Link> */}
+          <Link to="/forgetPassword">
+            <span className="capitalize text-green-500 underline">
+              forget password
             </span>
           </Link>
         </div>

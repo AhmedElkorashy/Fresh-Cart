@@ -22,9 +22,12 @@ import { Toaster } from "react-hot-toast";
 import CategoriesDetails from "./components/CategoriesDetails/CategoriesDetails";
 import BrandDetails from "./components/BrandDetails/BrandDetails";
 import WishListContextProvider from "./Context/WishListContext";
-import WishList from './components/WishList/WishList';
-import Payment from './components/Payment/Payment';
-import AllOrders from './components/AllOrders/AllOrders';
+import WishList from "./components/WishList/WishList";
+import Payment from "./components/Payment/Payment";
+import AllOrders from "./components/AllOrders/AllOrders";
+import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
+import RestCode from "./components/RestCode/RestCode";
+import RestPassword from "./components/RestPassword/RestPassword";
 
 let query = new QueryClient();
 
@@ -122,6 +125,18 @@ let x = createHashRouter([
             <AllOrders />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "forgetPassword",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "restCode",
+        element: <RestCode />,
+      },
+      {
+        path: "restPassword",
+        element: <RestPassword />,
       },
       { path: "*", element: <Notfound /> },
     ],
