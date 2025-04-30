@@ -32,14 +32,14 @@ export default function Register() {
   const [ErrorState, setErrorState] = useState("");
   async function getWishListBridge() {
     let res = await getWishList();
-    console.log(res);
+    // console.log(res);
     setWishListIds(res?.data?.data);
   }
   async function getCart() {
     let response = await getProductToCart();
-    console.log(response);
+    // console.log(response);
     if (response.data.status === "success") {
-      console.log(response);
+      // console.log(response);
       setCarts(response.data.data);
     }
   }
