@@ -104,6 +104,7 @@ export default function Payment() {
       </h2>
       <div className="relative z-0 w-full mb-5 group">
         <input
+        autoComplete="off"
           onChange={(e) => {
             setDetails(e.target.value);
           }}
@@ -123,6 +124,7 @@ export default function Payment() {
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
+         autoComplete="off"
           onChange={(e) => {
             setPhone(e.target.value);
           }}
@@ -142,6 +144,7 @@ export default function Payment() {
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
+         autoComplete="off"
           onChange={(e) => {
             setCity(e.target.value);
           }}
